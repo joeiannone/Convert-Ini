@@ -7,8 +7,27 @@ namespace Convert_Ini
     /// <summary>
     /// 
     /// </summary>
-    public static class IniConverter
+    public class IniConverter
     {
+        private IniParser _parser;
+
+        public IniConverter()
+        {
+            _parser = new IniParser();
+        }
+
+
+        /// <summary>
+        /// Converts ini file contents into a Dictionary
+        /// </summary>
+        /// <param name="inputObject"></param>
+        /// <returns></returns>
+        public Dictionary<string, Hashtable> From(string inputObject)
+        {
+            return _parser.Parse(inputObject);
+        }
+
+
         /// <summary>
         /// Converts inputObject to ini file string
         /// </summary>
@@ -20,10 +39,12 @@ namespace Convert_Ini
 
             foreach (var section in inputObject.Keys)
             {
+                
                 if (section != "_")
                 {
                     output += $"[{section}]{Environment.NewLine}";
                 }
+
                 foreach (DictionaryEntry item in inputObject[section])
                 {
                     if (section != "_")
@@ -35,16 +56,6 @@ namespace Convert_Ini
             }
 
             return output;
-        }
-
-        /// <summary>
-        /// Converts ini file contents into a Dictionary
-        /// </summary>
-        /// <param name="inputObject"></param>
-        /// <returns></returns>
-        public static Dictionary<string, Hashtable> From(string inputObject)
-        {
-            return IniParser.Parse(inputObject);
         }
 
     }

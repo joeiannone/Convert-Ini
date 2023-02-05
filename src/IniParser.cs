@@ -9,18 +9,23 @@ namespace Convert_Ini
     /// <summary>
     /// 
     /// </summary>
-    public static class IniParser
+    public class IniParser
     {
+        private string _section { get; set; }
+        public IniParser() 
+        {
+            _section = "_";
+        }
         /// <summary>
         /// Parses ini file contents into a Dictionary
         /// </summary>
         /// <param name="iniString"></param>
         /// <returns></returns>
-        public static Dictionary<string, Hashtable> Parse(string iniString)
+        public Dictionary<string, Hashtable> Parse(string iniString)
         {
 
             Dictionary<string, Hashtable> result = new Dictionary<string, Hashtable>();
-            string section = "_";
+
             using (StringReader reader = new StringReader(iniString))
             {
                 // default section when none is specified
@@ -37,7 +42,7 @@ namespace Convert_Ini
 
                     if (sectionMatch.Success)
                     {
-                        section = sectionMatch.Groups[1].Value.Trim();
+                        _section = sectionMatch.Groups[1].Value.Trim();
                     }
 
                     else if (entryMatch.Success) 
@@ -49,22 +54,22 @@ namespace Convert_Ini
 
                         }
 
-                        if (!result.ContainsKey(section))
+                        if (!result.ContainsKey(_section))
                         {
-                            result.Add(section, new Hashtable()); 
+                            result.Add(_section, new Hashtable()); 
                         }
 
                         string iniEntryKey = entryMatch.Groups[1].Value.Trim();
                         string iniEntryValue = entryMatch.Groups[2].Value.Trim();
 
-                        if (result[section].ContainsKey(iniEntryKey))
+                        if (result[_section].ContainsKey(iniEntryKey))
                         {
                             // override assignment when there is a duplicate key
-                            result[section][iniEntryKey] = iniEntryValue;
+                            result[_section][iniEntryKey] = iniEntryValue;
                         }
                         else
                         {
-                            result[section].Add(iniEntryKey, iniEntryValue);
+                            result[_section].Add(iniEntryKey, iniEntryValue);
                         }
                         
                     }

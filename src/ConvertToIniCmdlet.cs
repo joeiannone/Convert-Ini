@@ -42,8 +42,6 @@ namespace Convert_Ini
             var keys = (ICollection)psObject.Properties.Where(p => p.Name == "Keys").FirstOrDefault().Value;
             var vals = (ICollection)psObject.Properties.Where(p => p.Name == "Values").FirstOrDefault().Value;
 
-            // initialize input Dictionary with keys
-
             Hashtable kht = new Hashtable();
 
             int i = 0;

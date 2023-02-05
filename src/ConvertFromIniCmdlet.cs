@@ -10,6 +10,10 @@ namespace Convert_Ini
     [OutputType(typeof(Dictionary<string, Hashtable>))]
     public class ConvertFromIniCmdlet : PSCmdlet
     {
+
+        private IniConverter _converter;
+        private List<string> _inputBuffer;
+
         [Parameter(
             Position = 0,
             Mandatory = true,
@@ -17,20 +21,34 @@ namespace Convert_Ini
             ValueFromPipelineByPropertyName = true)]
         public string InputObject { get; set; } = string.Empty;
 
+        /**
+         * Initialize
+         */
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
+
+            _converter = new IniConverter();
+            _inputBuffer = new List<string>();
         }
 
+        /**
+         * Process each data in pipeline
+         */
         protected override void ProcessRecord()
         {
-            Console.WriteLine("Process call");
-            WriteObject(IniConverter.From(InputObject));
+            // Add each pipeline data to input buffer
+            _inputBuffer.Add(InputObject);
         }
 
+        /**
+         * Convert ini and write out
+         */
         protected override void EndProcessing()
         {
             base.EndProcessing();
+            
+            WriteObject(_converter.From(string.Join($"{Environment.NewLine}", _inputBuffer)));
         }
 
     }
