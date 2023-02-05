@@ -11,25 +11,27 @@ namespace Convert_Ini
     /// </summary>
     public class IniParser
     {
+
         private string _section { get; set; }
+
         public IniParser() 
         {
-            _section = "_";
+            _section = string.Empty;
         }
+
+
         /// <summary>
         /// Parses ini file contents into a Dictionary
         /// </summary>
         /// <param name="iniString"></param>
         /// <returns></returns>
-        public Dictionary<string, Hashtable> Parse(string iniString)
+        public Dictionary<string, dynamic> Parse(string iniString)
         {
 
-            Dictionary<string, Hashtable> result = new Dictionary<string, Hashtable>();
+            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
 
             using (StringReader reader = new StringReader(iniString))
             {
-                // default section when none is specified
-
                 Regex iniSectionRgx = new Regex(@"^\[(.+)\]$");
                 Regex iniEntryRgx = new Regex(@"^\s*([^#].+?)\s*=\s*(.*)");
 
@@ -51,32 +53,37 @@ namespace Convert_Ini
                         if (entryMatch.Groups[1].Value.StartsWith(";"))
                         {
                             continue;
-
-                        }
-
-                        if (!result.ContainsKey(_section))
-                        {
-                            result.Add(_section, new Hashtable()); 
                         }
 
                         string iniEntryKey = entryMatch.Groups[1].Value.Trim();
                         string iniEntryValue = entryMatch.Groups[2].Value.Trim();
 
-                        if (result[_section].ContainsKey(iniEntryKey))
+                        if (_section == string.Empty)
                         {
-                            // override assignment when there is a duplicate key
-                            result[_section][iniEntryKey] = iniEntryValue;
+                            if (result.ContainsKey(iniEntryKey))
+                                result[iniEntryKey] = iniEntryValue;
+                            else
+                                result.Add(iniEntryKey, iniEntryValue);
                         }
-                        else
-                        {
-                            result[_section].Add(iniEntryKey, iniEntryValue);
+                        else {
+
+                            if (!result.ContainsKey(_section))
+                                result.Add(_section, new Hashtable());
+
+
+                            if (result[_section].ContainsKey(iniEntryKey))
+                            {
+                                result[_section][iniEntryKey] = iniEntryValue;
+                            }
+                            else
+                            {
+                                result[_section].Add(iniEntryKey, iniEntryValue);
+                            }
                         }
-                        
                     }
                 }
             }
 
-            
             return result;
         }
     }
