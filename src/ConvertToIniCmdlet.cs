@@ -35,9 +35,9 @@ namespace Convert_Ini
         /// </summary>
         /// <param name="psObject"></param>
         /// <returns></returns>
-        private static Dictionary<string, Hashtable> PSObjectToDictionary(PSObject psObject)
+        private static Dictionary<string, dynamic> PSObjectToDictionary(PSObject psObject)
         {
-            Dictionary<string, Hashtable> input = new Dictionary<string, Hashtable>();
+            Dictionary<string, dynamic> input = new Dictionary<string, dynamic>();
 
             var keys = (ICollection)psObject.Properties.Where(p => p.Name == "Keys").FirstOrDefault().Value;
             var vals = (ICollection)psObject.Properties.Where(p => p.Name == "Values").FirstOrDefault().Value;
@@ -54,9 +54,6 @@ namespace Convert_Ini
                 i++;
             }
 
-            if (!input.ContainsKey("_"))
-                input.Add("_", new Hashtable());
-
 
             i = 0;
             foreach (var val in vals)
@@ -72,8 +69,7 @@ namespace Convert_Ini
                 }
                 else if (val.GetType() == typeof(string))
                 {
-                    input.Remove(kht[i].ToString());
-                    input["_"].Add(kht[i], val);
+                    input[kht[i].ToString()] = val;
                 }
                 i++;
             }
