@@ -1,12 +1,13 @@
 ﻿using Microsoft.PowerShell;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Management.Automation;
 using System.Reflection;
-
 namespace Convert_Ini
 {
 
@@ -20,12 +21,12 @@ namespace Convert_Ini
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        public PSObject InputObject { get; set; }
+        public Hashtable InputObject { get; set; }
 
 
         protected override void ProcessRecord()
-        {            
-            WriteObject(IniConverter.To(PSObjectToDictionary(InputObject)));
+        {
+            WriteObject(IniConverter.To(PSObjectToDictionary((PSObject)InputObject)));
         }
 
 
@@ -37,13 +38,14 @@ namespace Convert_Ini
         /// <returns></returns>
         private static Dictionary<string, dynamic> PSObjectToDictionary(PSObject psObject)
         {
+            
             Dictionary<string, dynamic> input = new Dictionary<string, dynamic>();
 
             var keys = (ICollection)psObject.Properties.Where(p => p.Name == "Keys").FirstOrDefault().Value;
             var vals = (ICollection)psObject.Properties.Where(p => p.Name == "Values").FirstOrDefault().Value;
 
             Hashtable kht = new Hashtable();
-
+            
             int i = 0;
             foreach (var key in keys)
             {
@@ -73,8 +75,11 @@ namespace Convert_Ini
                 }
                 i++;
             }
+            
+            
 
             return input;
+            
         }
 
 

@@ -2,11 +2,12 @@ using System.Collections;
 
 namespace Convert_Ini.Test
 {
-    public class Tests
+    public class ConvertToTests
     {
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]
