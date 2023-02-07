@@ -3,7 +3,7 @@
  * @Author: Joseph Iannone 
  * @Date: 2023-02-06 23:57:35 
  * @Last Modified by: Joseph Iannone
- * @Last Modified time: 2023-02-07 00:28:39
+ * @Last Modified time: 2023-02-07 10:48:22
  */
 #>
 Function ConvertTo-Ini {
@@ -44,8 +44,8 @@ Function ConvertTo-Ini {
     #>
     [CmdletBinding()]
     Param(
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
-        [PSObject]$InputObject
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true)][Object]$InputObject,
+        [Parameter(Mandatory=$false, ValueFromPipeline=$false)][switch]$Compress
     )
     
     Begin {
@@ -55,11 +55,11 @@ Function ConvertTo-Ini {
     }
     
     Process {
+
+        # normalize / validate input object as json
+        $obj = $InputObject | ConvertTo-Json | ConvertFrom-Json
         
-        # normalize input
-        $ht = $InputObject | ConvertTo-Json | ConvertFrom-Json | Convert-PSCustomObjectToHashtable
-        
-        $result = [Convert_Ini.IniWriter]::Write($ht)
+        $result = [Convert_Ini.IniWriter]::Write($obj, $Compress)
         
         $result
     
