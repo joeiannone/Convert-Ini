@@ -3,7 +3,7 @@
  * @Author: Joseph Iannone 
  * @Date: 2023-02-06 23:57:35 
  * @Last Modified by: Joseph Iannone
- * @Last Modified time: 2023-02-07 10:48:22
+ * @Last Modified time: 2023-02-07 16:02:20
  */
 #>
 Function ConvertTo-Ini {
@@ -43,14 +43,13 @@ Function ConvertTo-Ini {
         State=Pennsylvania
     #>
     [CmdletBinding()]
+    [OutputType([string])]
     Param(
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)][Object]$InputObject,
         [Parameter(Mandatory=$false, ValueFromPipeline=$false)][switch]$Compress
     )
     
     Begin {
-        
-        #[System.Collections.ArrayList]$inputBuffer = [System.Collections.ArrayList]@()
     
     }
     
