@@ -35,9 +35,7 @@ namespace Convert_Ini
 
                 else
                 {
-
                     noSection.Add($"{item.Name}={item.Value.ToString()}{Environment.NewLine}");
-
                 }
 
             }
