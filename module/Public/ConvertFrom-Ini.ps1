@@ -3,7 +3,7 @@
  * @Author: Joseph Iannone 
  * @Date: 2023-02-06 12:35:13 
  * @Last Modified by: Joseph Iannone
- * @Last Modified time: 2023-02-07 12:57:34
+ * @Last Modified time: 2023-02-07 16:14:38
  */
 #>
 
@@ -43,39 +43,21 @@ Function ConvertFrom-Ini {
         
         [System.Collections.ArrayList]$inputBuffer = [System.Collections.ArrayList]::new()
 
-        [Convert_Ini.IniParser]$parser = [Convert_Ini.iniParser]::new()
-
-        [PSCustomObject]$result;
-
     }
     
     Process {
         
-        $inputBuffer.Add([string]$InputObject)
-        #$result.Add($parser.ThisIsATest($InputObject))
-        #[PSCustomObject]$result = $parser.ThisIsATest($InputObject)
-
-        #$result
+        [void]$inputBuffer.Add([string]$InputObject)
+        
     }
     
     End {
-        #$result
-        [string]$inputStr = $($inputBuffer -join [Environment]::NewLine)
-        
 
-        #$inputStr
+        [string]$inputStr = $inputBuffer -join [Environment]::NewLine
+        
+        [PSCustomObject]$result = [Convert_Ini.IniParser]::Parse($inputStr) 
 
-        #[Convert_Ini.IniParser]$parser = [Convert_Ini.iniParser]::new()
-        
-
-        [PSCustomObject]$result = $parser.ThisIsATest($inputStr)
-        
-        #return $parser.ThisIsATest($inputStr)
-        #$result
-        
-        #[PSCustomObject]$output = New-Object PSCustomObject -Property $result
-        
-        #$output
         $result
+        
     }
 }
