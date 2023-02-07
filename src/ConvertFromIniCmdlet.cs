@@ -7,7 +7,7 @@ namespace Convert_Ini
 {
 
     [Cmdlet(VerbsData.ConvertFrom, "Ini")]
-    [OutputType(typeof(Dictionary<string, Hashtable>))]
+    [OutputType(typeof(Dictionary<string, dynamic>))]
     public class ConvertFromIniCmdlet : PSCmdlet
     {
 

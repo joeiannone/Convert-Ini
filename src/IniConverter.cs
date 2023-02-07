@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,7 +16,6 @@ namespace Convert_Ini
         {
             _parser = new IniParser();
         }
-
 
         /// <summary>
         /// Converts ini file contents into a Dictionary
@@ -37,28 +37,53 @@ namespace Convert_Ini
         {
             string output = string.Empty;
 
-            foreach (var section in inputObject.Keys)
+  
+            foreach (var section in inputObject)
             {
-                bool hasSection = inputObject[section].GetType() == typeof(Hashtable);
-
+                bool hasSection = inputObject[section.Key].GetType() != typeof(string);
 
                 if (hasSection)
                 {
                     output += $"[{section}]{Environment.NewLine}";
-                
-                    foreach (DictionaryEntry item in inputObject[section])
+                    Console.WriteLine(inputObject[section.Key].GetType());
+                    foreach (JProperty item in inputObject[section.Key])
                     {
                         
-                        output += $"{item.Key}={item.Value}{Environment.NewLine}";
+                        output += $"{item.Name}={item.Value}{Environment.NewLine}";
                         
                     }
                 }
                 else
                 {
-                    output = $"{section}={inputObject[section]}{Environment.NewLine}{output}";
+                    output = $"{section}={inputObject[section.Key]}{Environment.NewLine}{output}";
                 }
                 
             }
+
+            return output;
+        }
+
+
+        public static string __To(Dictionary<string, dynamic> inputObject)
+        {
+            string output = string.Empty;
+
+            Console.WriteLine(inputObject.Count);
+            int i = 0;
+            foreach (var section in inputObject)
+            {
+                Console.WriteLine($"{section.Key} : {section.Value.GetType()}");
+
+                if (section.Key == "Keys")
+                {
+                    foreach (var ja in (JArray)section.Value)
+                    {
+                        
+                    }
+                }
+                
+            }
+            
 
             return output;
         }
