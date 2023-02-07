@@ -21,12 +21,24 @@ namespace Convert_Ini
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        public Hashtable InputObject { get; set; }
+        public dynamic InputObject { get; set; }
 
 
         protected override void ProcessRecord()
         {
-            WriteObject(IniConverter.To(PSObjectToDictionary((PSObject)InputObject)));
+            
+            try
+            {
+                string jsonStr = JsonConvert.SerializeObject(InputObject, Formatting.None, new PSObjectConverter(typeof(PSObject)));
+                Dictionary<string, dynamic> input = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonStr);
+                WriteObject(IniConverter.__To(input));
+            }
+            catch (Exception ex)
+            {
+                WriteError(new ErrorRecord(ex, "1", ErrorCategory.WriteError, InputObject));
+            }
+
+
         }
 
 

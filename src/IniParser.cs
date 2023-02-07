@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Management.Automation;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Convert_Ini
@@ -17,6 +19,15 @@ namespace Convert_Ini
         public IniParser() 
         {
             _section = string.Empty;
+        }
+
+        public Dictionary<string, dynamic> ThisIsATest(string iniString)
+        {
+            Console.WriteLine($"Input: {iniString}");
+            Dictionary<string, dynamic> result = new Dictionary<string, dynamic>();
+            
+            return result;
+            
         }
 
 
