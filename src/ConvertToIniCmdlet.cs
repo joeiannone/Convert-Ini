@@ -26,7 +26,7 @@ namespace Convert_Ini
 
         protected override void ProcessRecord()
         {
-            
+            /*
             try
             {
                 string jsonStr = JsonConvert.SerializeObject(InputObject, Formatting.None, new PSObjectConverter(typeof(PSObject)));
@@ -37,7 +37,7 @@ namespace Convert_Ini
             {
                 WriteError(new ErrorRecord(ex, "1", ErrorCategory.WriteError, InputObject));
             }
-
+            */
 
         }
 

@@ -1,40 +1,53 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Management.Automation;
 
 namespace Convert_Ini
 {
     public class IniWriter
     {
-        public static string Write(Hashtable inputObject)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputObject"></param>
+        /// <param name="compressed"></param>
+        /// <returns></returns>
+        public static string Write(PSObject inputObject, bool compressed = false)
         {
+
             string output = string.Empty;
-            
-            foreach (var section in inputObject.Keys)
+
+            List<string> noSection = new List<string>();
+
+            string room = compressed ? string.Empty : Environment.NewLine;
+
+            foreach (PSNoteProperty item in inputObject.Properties)
             {
-                bool isSection = inputObject[section] is ICollection;
 
-                if (isSection)
+                if (item.Value.GetType() == typeof(PSObject))
                 {
-                    output += $"[{section}]{Environment.NewLine}";
 
-                    foreach (var key in ((Hashtable)inputObject[section]).Keys)
-                    {
+                    output += $"[{item.Name}]{Environment.NewLine}";
 
-                        output += $"{key}={((Hashtable)inputObject[section])[key].ToString()}{Environment.NewLine}";
+                    output += Write((PSObject)item.Value, compressed);
 
-                    }
                 }
+
                 else
                 {
-                    output = $"{section}={inputObject[section].ToString()}{Environment.NewLine}{output}";
+
+                    noSection.Add($"{item.Name}={item.Value.ToString()}{Environment.NewLine}");
+
                 }
 
             }
-            
+
+            // prepend items with no section
+            output = $"{string.Join("", noSection)}{room}{output}";
+
             return output;
+
         }
+
     }
 }
