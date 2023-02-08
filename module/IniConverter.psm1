@@ -7,11 +7,11 @@
  */
 #>
 
-# Load Convert-Ini assembly
-[void]([System.Reflection.Assembly]::LoadFrom("$($PSScriptRoot)\lib\Convert-Ini\Convert-Ini.dll"))
-
 # Global variable for module root directory
 $PSModuleRoot = $PSScriptRoot
+
+# Load ConvertIni assembly
+[void]([System.Reflection.Assembly]::LoadFrom("$($PSModuleRoot)\lib\ConvertIni\ConvertIni.dll"))
 
 #Get public and private function definition files.
 $Public  = @( Get-ChildItem -Path $PSModuleRoot\Public\*.ps1 -ErrorAction SilentlyContinue )

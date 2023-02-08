@@ -7,13 +7,13 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Convert-Ini/1.0.0": {
+      "ConvertIni/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "PowerShellStandard.Library": "5.1.1"
         },
         "runtime": {
-          "Convert-Ini.dll": {}
+          "ConvertIni.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -33,7 +33,7 @@
     }
   },
   "libraries": {
-    "Convert-Ini/1.0.0": {
+    "ConvertIni/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
