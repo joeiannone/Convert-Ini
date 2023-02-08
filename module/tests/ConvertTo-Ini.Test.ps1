@@ -1,3 +1,12 @@
+<#/*
+ * @Author: Joseph Iannone 
+ * @Date: 2023-02-08 09:32:58 
+ * @Last Modified by:   Joseph Iannone 
+ * @Last Modified time: 2023-02-08 09:32:58 
+ */#>
+
+# Pester ~5.4.0 required
+
 BeforeAll {
 
     $PSModuleRoot = (Get-Item $PSScriptRoot).parent.fullname

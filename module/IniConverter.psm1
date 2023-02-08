@@ -1,11 +1,9 @@
-<#
-/*
+<#/*
  * @Author: Joseph Iannone 
  * @Date: 2023-02-07 00:15:52 
  * @Last Modified by: Joseph Iannone
  * @Last Modified time: 2023-02-07 00:29:07
- */
-#>
+ */#>
 
 # Global variable for module root directory
 $PSModuleRoot = $PSScriptRoot
