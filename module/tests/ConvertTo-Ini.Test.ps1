@@ -51,11 +51,11 @@ City=Philadelphia
 State=PA
 ZipCode=123456
 
-        "
+"
 
         
         $ini = $testobj | ConvertTo-Ini
 
-        $ini | Should -Be $expectedStringLiteral
+        $ini | Should -BeExactly $expectedStringLiteral
     }
 }
