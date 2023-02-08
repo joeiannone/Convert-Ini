@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConvertIni", "src\ConvertIni.csproj", "{E5A8133A-61B9-45F7-897F-A7C7FA146CC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConvertIni.Test", "test\ConvertIni.Test.csproj", "{0F1081EE-CC50-4ED7-A0E0-3EB299ED9248}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{E5A8133A-61B9-45F7-897F-A7C7FA146CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5A8133A-61B9-45F7-897F-A7C7FA146CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5A8133A-61B9-45F7-897F-A7C7FA146CC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F1081EE-CC50-4ED7-A0E0-3EB299ED9248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F1081EE-CC50-4ED7-A0E0-3EB299ED9248}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F1081EE-CC50-4ED7-A0E0-3EB299ED9248}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F1081EE-CC50-4ED7-A0E0-3EB299ED9248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
