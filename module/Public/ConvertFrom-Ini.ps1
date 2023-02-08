@@ -1,11 +1,9 @@
-<#
-/*
+<#/*
  * @Author: Joseph Iannone 
  * @Date: 2023-02-06 12:35:13 
  * @Last Modified by: Joseph Iannone
  * @Last Modified time: 2023-02-07 16:14:38
- */
-#>
+ */#>
 
 Function ConvertFrom-Ini {
     <#

@@ -1,11 +1,10 @@
-<#
-/*
+<#/*
  * @Author: Joseph Iannone 
  * @Date: 2023-02-06 23:57:35 
  * @Last Modified by: Joseph Iannone
  * @Last Modified time: 2023-02-07 16:02:20
- */
-#>
+ */#>
+
 Function ConvertTo-Ini {
     <#
     .SYNOPSIS
