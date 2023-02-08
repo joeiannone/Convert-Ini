@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 
-namespace Convert_Ini
+namespace ConvertIni
 {
     public class IniWriter
     {

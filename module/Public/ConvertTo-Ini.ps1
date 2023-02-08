@@ -18,29 +18,29 @@ Function ConvertTo-Ini {
         A PSObject to convert to INI
     
     .EXAMPLE
-    
-        $myObject = @{
-            Name = 'Joe'     
-            Language = 'PowerShell and C#'
-            Address = @{
-                Street = '123 South Street'
-                City = 'Philadelphia'
-                State = 'Pennsylvania'
-                ZIP = 19147
-            }
-        }
-        
-        $Ini = $myObject | ConvertTo-Ini
-        
-        $Ini
-        
-        Language=PowerShell and C#
+        PS C:> $obj = @{
+        >>      Name = 'Joe'
+        >>      Language = 'PowerShell'
+        >>      Address = @{
+        >>          Street = '123 Fitzwater Street'
+        >>          City = 'Philadelphia'
+        >>          State = 'Pennsylvania'
+        >>          ZIP = 19147
+        >>      }
+        >>    }
+        PS C:> $ini = $obj | ConvertTo-Ini
+        PS C:> $ini > Config.ini
+        PS C:> cat .\Config.ini
         Name=Joe
+        Language=PowerShell
+
         [Address]
         ZIP=19147
-        Street=123 South Street
-        City=Philadelphia
+        Street=123 Fitzwater Street
         State=Pennsylvania
+        City=Philadelphia
+
+        
     #>
     [CmdletBinding()]
     [OutputType([string])]
@@ -58,7 +58,7 @@ Function ConvertTo-Ini {
         # normalize / validate input object as json
         $obj = $InputObject | ConvertTo-Json | ConvertFrom-Json
         
-        $result = [Convert_Ini.IniWriter]::Write($obj, $Compress)
+        $result = [ConvertIni.IniWriter]::Write($obj, $Compress)
         
         $result
     

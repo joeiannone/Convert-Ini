@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Convert_Ini.Test
+namespace ConvertIni.Test
 {
     public class ConvertToTests
     {

@@ -2,7 +2,7 @@
 using System.Management.Automation;
 using System.Text.RegularExpressions;
 
-namespace Convert_Ini
+namespace ConvertIni
 {
     /// <summary>
     /// 

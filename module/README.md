@@ -1,0 +1,66 @@
+# Convert-Ini
+
+### A PowerShell Module for converting objects to and from ini files.
+
+#### Exported PowerShell Functions:
+- ```ConvertFrom-Ini```
+- ```ConvertTo-Ini```
+
+#### Examples:
+##### ConvertFrom-Ini
+```
+PS C:> $ini = "
+>> Language=Powershell
+>> Name=Joe
+>> [Address]
+>> ZIP=19147
+>> Street=123 Fitzwater Street
+>> State=Pennsylvania
+>> "
+PS C:> $obj = $ini | ConvertFrom-Ini
+PS C:> $obj
+
+
+Language   Name Address
+--------   ---- -------
+Powershell Joe  @{ZIP=19147; Street=123 Fitzwater Street; City=Philadelphia; State=Pennsylvania}
+
+
+PS C:> $obj.Name
+Joe
+PS C:> $obj.Address.Street
+123 Fitzwater Street
+PS C:>
+```
+```
+PS C:> $obj1 = Get-Content .\Config.ini | ConvertFrom-Ini
+PS C:> $obj2 = Get-Content -Raw .\Config.ini | ConvertFrom-Ini
+PS C:> $obj3 = ConvertFrom-Ini -InputObject (Get-Content .\Config.ini)
+```
+
+##### ConvertTo-Ini
+```
+PS C:> $obj = @{
+>> Name = 'Joe'
+>> Language = 'PowerShell'
+>> Address = @{
+>>      Street = '123 Fitzwater Street'
+>>      City = 'Philadelphia'
+>>      State = 'Pennsylvania'
+>>      ZIP = 19147
+>>   }
+>> }
+PS C:> $ini = $obj | ConvertTo-Ini
+PS C:> $ini > Config.ini
+PS C:> cat .\Config.ini
+Name=Joe
+Language=PowerShell
+
+[Address]
+ZIP=19147
+Street=123 Fitzwater Street
+State=Pennsylvania
+City=Philadelphia
+
+PS C:>
+```
