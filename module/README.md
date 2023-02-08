@@ -1,5 +1,5 @@
 # Convert-Ini
-
+![Tests](https://github.com/joeiannone/Convert-Ini/actions/workflows/tests.yml/badge.svg)
 ### A PowerShell Module for converting objects to and from ini files.
 
 #### Exported PowerShell Functions:
