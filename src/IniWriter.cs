@@ -23,19 +23,20 @@ namespace ConvertIni
 
             foreach (PSNoteProperty item in inputObject.Properties)
             {
+                var itemValue = (item.Value == null) ? string.Empty : item.Value;
 
-                if (item.Value.GetType() == typeof(PSObject))
+                if (itemValue.GetType() == typeof(PSObject))
                 {
 
                     output += $"[{item.Name}]{Environment.NewLine}";
 
-                    output += Write((PSObject)item.Value, compressed);
+                    output += Write((PSObject)itemValue, compressed);
 
                 }
 
                 else
                 {
-                    noSection.Add($"{item.Name}={item.Value.ToString()}{Environment.NewLine}");
+                    noSection.Add($"{item.Name}={itemValue.ToString()}{Environment.NewLine}");
                 }
 
             }
