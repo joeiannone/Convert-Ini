@@ -5,7 +5,7 @@
 You can find the latest releases and downloads for this module in the PowerShell Gallery: [https://www.powershellgallery.com/packages/IniConverter](https://www.powershellgallery.com/packages/IniConverter)
 
 
-###Installation
+### Installation
 ```
 PS C:> Install-Module -Name IniConverter
 ```
