@@ -5,23 +5,28 @@
  * @Last Modified time: 2023-02-08 09:32:58 
  */#>
 
-# Pester ~5.4.0 required
+# Pester v5 required
 
 BeforeAll {
 
-    $PSModuleRoot = (Get-Item $PSScriptRoot).parent.fullname
+    # Get module root
+    $script:PSModuleRoot = (Get-Item $PSScriptRoot).parent.fullname
 
-    [void]([System.Reflection.Assembly]::LoadFrom("$($PSModuleRoot)\lib\ConvertIni\ConvertIni.dll"))
+    # Load ConvertIni assembly
+    [void]([System.Reflection.Assembly]::LoadFrom("$($script:PSModuleRoot)\lib\ConvertIni\ConvertIni.dll"))
     
-    . $PSModuleRoot\Public\ConvertTo-Ini.ps1
+    # Load ConvertTo-Ini Function
+    . $script:PSModuleRoot\Public\ConvertTo-Ini.ps1
 
 }
 
+
 Describe 'ConvertTo-Ini' {
 
-    It 'Expected convert to output' {
+    It 'Converts PSObject to Ini text string' {
 
-        $testobj = [PSCustomObject]@{
+        # Object to convert
+        $obj = [PSCustomObject]@{
             Test1 = "hello"
             Test2 = "world"
             Test3 = 123456
@@ -41,30 +46,13 @@ Describe 'ConvertTo-Ini' {
             Test6 = ""
         }
 
-        $expectedStringLiteral = "Test1=hello
-Test2=world
-Test3=123456
-Test4=123.456
-Test5=
-Test6=
+        # Expected output string
+        $expected = Get-Content "$($script:PSModuleRoot)\tests\test_input_001.ini" | Out-String
 
-[Profile]
-Name=Joe
-Occupation=Applications Developer
+        # Convert
+        $ini = $obj | ConvertTo-Ini
 
-[EmptySection]
-
-[Address]
-Street=123 Main Street
-City=Philadelphia
-State=PA
-ZipCode=123456
-
-"
-
-        
-        $ini = $testobj | ConvertTo-Ini
-
-        $ini | Should -BeExactly $expectedStringLiteral
+        # Assert
+        $ini.Trim() | Should -BeExactly $expected.Trim()
     }
 }

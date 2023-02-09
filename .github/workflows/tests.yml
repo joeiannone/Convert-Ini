@@ -16,3 +16,7 @@ jobs:
         shell: pwsh
         run: |
           Invoke-Pester ./module/tests/ConvertTo-Ini.Test.ps1 -Passthru
+      - name: Perform a Pester test from the ConvertFrom-Ini.Test.ps1 file
+        shell: pwsh
+        run: |
+          Invoke-Pester ./module/tests/ConvertFrom-Ini.Test.ps1 -Passthru    
