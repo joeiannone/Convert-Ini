@@ -1,12 +1,12 @@
 # Convert-Ini
 ![Tests](https://github.com/joeiannone/Convert-Ini/actions/workflows/tests.yml/badge.svg)
-### A PowerShell Module for converting ini files into objects and objects into ini files.
+### A PowerShell module for parsing, converting, and managing ini file properties
 
 You can find the latest releases and downloads for this module in the PowerShell Gallery: [https://www.powershellgallery.com/packages/IniConverter](https://www.powershellgallery.com/packages/IniConverter)
 
 
 ### Installation
-```
+```powershell
 PS C:> Install-Module -Name IniConverter
 ```
 ---
@@ -17,8 +17,8 @@ PS C:> Install-Module -Name IniConverter
 
 #### Examples:
 ##### ConvertFrom-Ini
-```
-PS C:> $ini = "
+```powershell
+PS > $ini = "
 >> Language=Powershell
 >> Name=Joe
 >> [Address]
@@ -26,8 +26,8 @@ PS C:> $ini = "
 >> Street=123 Fitzwater Street
 >> State=Pennsylvania
 >> "
-PS C:> $obj = $ini | ConvertFrom-Ini
-PS C:> $obj
+PS > $obj = $ini | ConvertFrom-Ini
+PS > $obj
 
 
 Language   Name Address
@@ -35,21 +35,21 @@ Language   Name Address
 Powershell Joe  @{ZIP=19147; Street=123 Fitzwater Street; City=Philadelphia; State=Pennsylvania}
 
 
-PS C:> $obj.Name
+PS > $obj.Name
 Joe
-PS C:> $obj.Address.Street
+PS > $obj.Address.Street
 123 Fitzwater Street
-PS C:>
+PS >
 ```
-```
-PS C:> $obj1 = Get-Content .\Config.ini | ConvertFrom-Ini
-PS C:> $obj2 = Get-Content -Raw .\Config.ini | ConvertFrom-Ini
-PS C:> $obj3 = ConvertFrom-Ini -InputObject (Get-Content .\Config.ini)
+```powershell
+PS > $obj1 = Get-Content .\Config.ini | ConvertFrom-Ini
+PS > $obj2 = Get-Content -Raw .\Config.ini | ConvertFrom-Ini
+PS > $obj3 = ConvertFrom-Ini -InputObject (Get-Content .\Config.ini)
 ```
 
 ##### ConvertTo-Ini
-```
-PS C:> $obj = @{
+```powershell
+PS > $obj = @{
 >> Name = 'Joe'
 >> Language = 'PowerShell'
 >> Address = @{
@@ -59,9 +59,9 @@ PS C:> $obj = @{
 >>      ZIP = 19147
 >>   }
 >> }
-PS C:> $ini = $obj | ConvertTo-Ini
-PS C:> $ini > Config.ini
-PS C:> cat .\Config.ini
+PS > $ini = $obj | ConvertTo-Ini
+PS > $ini > Config.ini
+PS > cat .\Config.ini
 Name=Joe
 Language=PowerShell
 
@@ -71,5 +71,5 @@ Street=123 Fitzwater Street
 State=Pennsylvania
 City=Philadelphia
 
-PS C:>
+PS >
 ```
