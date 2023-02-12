@@ -13,19 +13,19 @@ BeforeAll {
     
     # Import module
     Import-Module "$($script:PSModuleRoot)\IniConverter.psd1"
-    
 
+    # set test file path
     $script:TestFile = "$($script:PSModuleRoot)\tests\add-inipropertytest.ini"
+
+    # setup test file
+    Get-Content "$($script:PSModuleRoot)\tests\test_input_002.ini" > $script:TestFile
 }
 
 
 Describe 'Add-IniProperty' {
 
     It 'Adds or Updates properties from an input object in a specified ini file' {
-
-        # setup test file
-        Get-Content "$($script:PSModuleRoot)\tests\test_input_002.ini" > $script:TestFile
-
+        
         [PSCustomObject]$obj =  Get-Content $script:TestFile | ConvertFrom-Ini
 
         $testKey1 = "testsectionkey$((Get-Date).ToString("yyyyMMddHHmmss"))"

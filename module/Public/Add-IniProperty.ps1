@@ -43,8 +43,8 @@ Function Add-IniProperty {
             If ($obj.PSObject.Properties[$_.Name]) {
                 
                 $currentObjName = $_.Name
-
-                $objItemType = $obj.PSObject.Properties[$currentObjName].Value.GetType()
+                
+                $objItemType = $obj.$currentObjName.GetType()
 
                 # if the input property and file property values are same type but not string
                 If ($objItemType -eq $_.Value.GetType() -and $objItemType.Name -ne "String") {
@@ -53,7 +53,7 @@ Function Add-IniProperty {
                     $_.Value.PSObject.Properties | ForEach-Object  {
                         
                         # update existing property with matching input porperty value
-                        $obj.PSObject.Properties[$currentObjName].Value.PSObject.Properties[$_.Name].Value = $_.Value
+                        $obj.$currentObjName.PSObject.Properties[$_.Name].Value = $_.Value
 
                     }
 
