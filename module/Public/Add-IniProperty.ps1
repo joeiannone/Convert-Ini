@@ -30,7 +30,7 @@ Function Add-IniProperty {
         test1 = hello
         test2 = world
 
-        PS > $myobj = @{ TestSection = @{ tes1 = "updated"; }; TestSection2 = @{ hello = "world"; } }
+        PS > $myobj = @{ TestSection = @{ test1 = "updated"; }; TestSection2 = @{ hello = "world"; } }
         PS > .\test.ini | Add-IniProperty -InputObject $myobj
         PS > type .\test.ini
         Test1 = hello
