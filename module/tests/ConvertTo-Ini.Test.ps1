@@ -11,12 +11,9 @@ BeforeAll {
 
     # Get module root
     $script:PSModuleRoot = (Get-Item $PSScriptRoot).parent.fullname
-
-    # Load ConvertIni assembly
-    [void]([System.Reflection.Assembly]::LoadFrom("$($script:PSModuleRoot)\lib\ConvertIni\ConvertIni.dll"))
     
-    # Load ConvertTo-Ini Function
-    . $script:PSModuleRoot\Public\ConvertTo-Ini.ps1
+    # Import module
+    Import-Module "$($script:PSModuleRoot)\IniConverter.psd1"
 
 }
 
