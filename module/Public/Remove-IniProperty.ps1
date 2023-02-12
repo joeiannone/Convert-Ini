@@ -6,7 +6,7 @@
  */#>
 
 
- Function Remove-IniProperty {
+Function Remove-IniProperty {
     <#
     .SYNOPSIS
         Remove Sections or properties from ini files
@@ -51,7 +51,7 @@
 
                 If ($Property) {
                     
-                    if ($null -eq $obj.$Section.psobject.properties.$Property) {
+                    if ($null -eq $obj.$Section.$Property) {
 
                         throw "No key '$($Section).$($Property)' found in $($Path)"
 
