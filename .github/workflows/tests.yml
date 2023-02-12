@@ -19,4 +19,12 @@ jobs:
       - name: Perform a Pester test from the ConvertFrom-Ini.Test.ps1 file
         shell: pwsh
         run: |
-          Invoke-Pester ./module/tests/ConvertFrom-Ini.Test.ps1 -Passthru    
+          Invoke-Pester ./module/tests/ConvertFrom-Ini.Test.ps1 -Passthru
+      - name: Perform a Pester test from the Add-IniProperty.Test.ps1 file
+        shell: pwsh
+        run: |
+          Invoke-Pester ./module/tests/Add-IniProperty.Test.ps1 -Passthru
+      - name: Perform a Pester test from the Remove-IniProperty.Test.ps1 file
+        shell: pwsh
+        run: |
+          Invoke-Pester ./module/tests/Remove-IniProperty.Test.ps1 -Passthru 
