@@ -9,17 +9,41 @@
 Function Add-IniProperty {
     <#
     .SYNOPSIS
-        Adds or Updates properties from an input object to a sepcified ini file
+        Adds or Updates properties from an input object to a specified ini file
     
     .DESCRIPTION
-        Adds or Updates properties from an input object to a sepcified ini file
+        Adds or Updates properties from an input object to a specified ini file
         
     .PARAMETER InputObject
-        An object containing properties to add or update
+        Object containing properties to add or update
     
     .EXAMPLE
         PS > .\test001.ini | Add-IniProperty -InputObject $myObj
         PS > Add-IniProperty -Path .\test001.ini -InputObject $myObj
+    
+    .EXAMPLE
+        PS > type .\test.ini
+        Test1 = hello
+        Test2 = world
+
+        [TestSection]
+        test1 = hello
+        test2 = world
+
+        PS > $myobj = @{ TestSection = @{ tes1 = "updated"; }; TestSection2 = @{ hello = "world"; } }
+        PS > .\test.ini | Add-IniProperty -InputObject $myobj
+        PS > type .\test.ini
+        Test1 = hello
+        Test2 = world
+
+        [TestSection]
+        test1 = updated
+        test2 = world
+
+        [TestSection2]
+        hello = world
+
+        PS >
 
     #>
     [CmdletBinding()]
@@ -43,7 +67,7 @@ Function Add-IniProperty {
             If ($obj.PSObject.Properties[$_.Name]) {
                 
                 $currentObjName = $_.Name
-                
+
                 $objItemType = $obj.$currentObjName.GetType()
 
                 # if the input property and file property values are same type but not string

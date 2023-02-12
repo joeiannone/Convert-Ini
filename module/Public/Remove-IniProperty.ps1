@@ -24,13 +24,30 @@ Function Remove-IniProperty {
         Property key in ini file to remove
     
     .EXAMPLE
-        PS C:> Remove-IniProperty -Path .\test001.ini -Section "Model" -Property "test"
+        PS > Remove-IniProperty -Path .\test001.ini -Section "Model" -Property "test"
         
-
     .EXAMPLE
-        PS C:> ".\test001.ini" | Remove-IniProperty -Section "Model" -Property "test"
-        PS C:> Remove-IniProperty -Path .\test001.ini -Section "Model" -Property "test"
-        PS C:> Remove-IniProperty -Path .\test001.ini -Property "test"
+        PS > type .\test.ini
+        Test1 = hello
+        Test2 = world
+
+        [TestSection]
+        test1 = updated
+        test2 = world
+
+        [TestSection2]
+        hello = world
+
+        PS > .\test.ini | Remove-IniProperty -Section "TestSection" -Property "test1"
+        PS > .\test.ini | Remove-IniProperty -Section "TestSection2"
+        PS > .\test.ini | Remove-IniProperty -Property "Test2"
+        PS > type .\test.ini
+        Test1 = hello
+
+        [TestSection]
+        test2 = world
+
+        PS >
 
     #>
     [CmdletBinding()]
