@@ -14,6 +14,8 @@ PS C:> Install-Module -Name IniConverter
 #### Exported PowerShell Functions:
 - ```ConvertFrom-Ini```
 - ```ConvertTo-Ini```
+- ```Add-IniProperty```
+- ```Remove-IniProperty```
 
 #### Examples:
 ##### ConvertFrom-Ini
@@ -61,7 +63,7 @@ PS > $obj = @{
 >> }
 PS > $ini = $obj | ConvertTo-Ini
 PS > $ini > Config.ini
-PS > cat .\Config.ini
+PS > type .\Config.ini
 Name=Joe
 Language=PowerShell
 
@@ -70,6 +72,57 @@ ZIP=19147
 Street=123 Fitzwater Street
 State=Pennsylvania
 City=Philadelphia
+
+PS >
+```
+
+##### Add-IniProperty
+```powershell
+PS > type .\test.ini
+Test1 = hello
+Test2 = world
+
+[TestSection]
+test1 = hello
+test2 = world
+
+PS > $myobj = @{ TestSection = @{ tes1 = "updated"; }; TestSection2 = @{ hello = "world"; } }
+PS > .\test.ini | Add-IniProperty -InputObject $myobj
+PS > type .\test.ini
+Test1 = hello
+Test2 = world
+
+[TestSection]
+test1 = updated
+test2 = world
+
+[TestSection2]
+hello = world
+
+PS >
+```
+
+##### Remove-IniProperty
+```powershell
+PS > type .\test.ini
+Test1 = hello
+Test2 = world
+
+[TestSection]
+test1 = updated
+test2 = world
+
+[TestSection2]
+hello = world
+
+PS > .\test.ini | Remove-IniProperty -Section "TestSection" -Property "test1"
+PS > .\test.ini | Remove-IniProperty -Section "TestSection2"
+PS > .\test.ini | Remove-IniProperty -Property "Test2"
+PS > type .\test.ini
+Test1 = hello
+
+[TestSection]
+test2 = world
 
 PS >
 ```
