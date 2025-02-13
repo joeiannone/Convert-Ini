@@ -9,11 +9,12 @@
 
 BeforeAll {
 
-    # Get module root
-    $script:PSModuleRoot = (Get-Item $PSScriptRoot).parent.fullname
-    
+    # Get module root directory
+    $script:PSModuleRoot = (Get-Item $PSScriptRoot).Parent.FullName
+
     # Import module
-    Import-Module "$($script:PSModuleRoot)\IniConverter.psd1"
+    Import-Module (Join-Path $script:PSModuleRoot "IniConverter.psd1")
+
 
 }
 
@@ -44,7 +45,7 @@ Describe 'ConvertTo-Ini' {
         }
 
         # Expected output string
-        $expected = Get-Content "$($script:PSModuleRoot)\tests\test_input_001.ini" | Out-String
+        $expected = Get-Content (Join-Path $script:PSModuleRoot "tests/test_input_001.ini") -Raw
 
         # Convert
         $ini = $obj | ConvertTo-Ini

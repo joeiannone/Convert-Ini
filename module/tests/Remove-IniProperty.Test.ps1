@@ -8,17 +8,18 @@
 
 BeforeAll {
 
-    # Get module root
-    $script:PSModuleRoot = (Get-Item $PSScriptRoot).parent.fullname
-    
+    # Get module root directory
+    $script:PSModuleRoot = (Get-Item $PSScriptRoot).Parent.FullName
+
     # Import module
-    Import-Module "$($script:PSModuleRoot)\IniConverter.psd1"
+    Import-Module (Join-Path $script:PSModuleRoot "IniConverter.psd1")
 
-    # set test file path
-    $script:TestFile = "$($script:PSModuleRoot)\tests\remove-inipropertytest.ini"
+    # Set test file path
+    $script:TestFile = Join-Path $script:PSModuleRoot "tests/remove-inipropertytest.ini"
 
-    # setup test file
-    Get-Content "$($script:PSModuleRoot)\tests\test_input_002.ini" > $script:TestFile
+    # Setup test file
+    $sourceFile = Join-Path $script:PSModuleRoot "tests/test_input_002.ini"
+    Get-Content $sourceFile | Set-Content $script:TestFile
 
 }
  
