@@ -9,11 +9,13 @@
 $PSModuleRoot = $PSScriptRoot
 
 # Load ConvertIni assembly
-[void]([System.Reflection.Assembly]::LoadFrom("$($PSModuleRoot)\lib\ConvertIni\ConvertIni.dll"))
+$assemblyPath = Join-Path $PSModuleRoot "lib/ConvertIni/ConvertIni.dll"
+[void]([System.Reflection.Assembly]::LoadFrom($assemblyPath))
 
 #Get public and private function definition files.
-$Public  = @( Get-ChildItem -Path $PSModuleRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
-$Private = @( Get-ChildItem -Path $PSModuleRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
+$Public  = @( Get-ChildItem -Path (Join-Path $PSModuleRoot "Public/*.ps1") -ErrorAction SilentlyContinue )
+$Private = @( Get-ChildItem -Path (Join-Path $PSModuleRoot "Private/*.ps1") -ErrorAction SilentlyContinue )
+
 
 #Dot source the files
 Foreach($import in @($Public + $Private))
